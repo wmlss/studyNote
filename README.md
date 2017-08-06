@@ -1,2 +1,2 @@
 ### 这是自己积累和写的笔记整理还有一些写在简书中
-> [简述链接](http://www.jianshu.com/u/5c60726404e1)
+> [简书链接](http://www.jianshu.com/u/5c60726404e1)
