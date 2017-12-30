@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+    body,html{
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      color: #000000;
+    }
+    table{
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+    }
+    thead{
+      background: #3d444c;
+      color: #ffffff;
+    }
+    td,th{
+      border: 1px solid #e1e1e1;
+      padding: 0;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <table id="jsTrolley">
+      <thead><tr><th>名称</th><th>价格</th><th>操作</th></tr></thead>
+      <tbody>
+          <tr><td>产品1</td><td>10.00</td><td><a href="javascript:void(0);">删除</a></td></tr>
+          <tr><td>产品2</td><td>30.20</td><td><a href="javascript:void(0);">删除</a></td></tr>
+          <tr><td>产品3</td><td>20.50</td><td><a href="javascript:void(0);">删除</a></td></tr>
+      </tbody>
+      <tfoot><tr><th>总计</th><td colspan="2">60.70(3件商品)</td></tr></tfoot>
+  </table>
+  </body>
+  <script type="text/javascript">
+  function add(items) {
+    var addHtml = '';
+    var tbody = document.getElementsByTagName('tbody')[0];
+    var tfoot = document.getElementsByTagName('tfoot')[0];
+    var info = tfoot.getElementsByTagName('td')[0];
+    var trs = tbody.getElementsByTagName('tr');
+    var totalPrice = 0;
+
+    for (var i in items) {
+      var name = items[i].name;
+      var price = items[i].price.toFixed(2);
+      var str = '<tr><td>'+name+'</td><td>'+price+'</td><td><a href="javascript:void(0);">删除</a></td></tr>'
+      //addHtml += `<tr><td>${name}</td><td>${price}</td><td><a href="javascript:void(0);">删除</a></td></tr>`
+      addHtml += str;
+    }
+    tbody.innerHTML += addHtml;
+    //重新统计数据
+    for (var i=0; i<trs.length; i++) {
+      var price = trs[i].getElementsByTagName('td')[1].innerHTML;
+      totalPrice += parseFloat(price);
+    }
+    info.innerHTML = totalPrice.toFixed(2)+'('+trs.length+'件商品)';
+  }
+
+  function bind(element) {
+    //清除选中节点
+    var currentTr = element.parentNode.parentNode;
+    currentTr.parentNode.removeChild(currentTr);
+    //重新统计数据
+    var tbody = document.getElementsByTagName('tbody')[0];
+    var tfoot = document.getElementsByTagName('tfoot')[0];
+    var trs = tbody.getElementsByTagName('tr');
+    var info = tfoot.getElementsByTagName('td')[0];
+    var totalPrice = 0;
+
+    for (var i=0; i<trs.length; i++) {
+      var price = trs[i].getElementsByTagName('td')[1].innerHTML;
+      totalPrice += parseFloat(price);
+    }
+    info.innerHTML = totalPrice.toFixed(2)+'('+trs.length+'件商品)';
+    // info.innerHTML = `${totalPrice}(${trs.length}件商品)`;
+  }
+  //绑定删除事件
+  var tbody = document.getElementsByTagName('tbody')[0];
+  tbody.onclick = function (e) {
+    if (e.target && e.target.nodeName == 'A') {
+        bind(e.target);
+    }
+  }
+  </script>
+</html>

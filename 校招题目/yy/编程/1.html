@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+    body,html{
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      color: #000000;
+    }
+    table{
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+    }
+    thead{
+      background: #3d444c;
+      color: #ffffff;
+    }
+    td,th{
+      border: 1px solid #e1e1e1;
+      padding: 0;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <ul class="list">
+      <li>aa<a href="/">删除</a></li>
+      <li>bb<a href="/">删除</a></li>
+      <li>cc<a href="/">删除</a></li>
+    </ul>
+  </body>
+  <script type="text/javascript">
+  //绑定删除事件
+  var list = document.getElementsByClassName('list')[0];
+  list.onclick = function(e) {
+    e.preventDefault();
+    if (e.target && e.target.nodeName == 'A') {
+      var delNode = e.target.parentNode;
+      delNode.parentNode.removeChild(delNode);
+    }
+  }
+  </script>
+</html>
